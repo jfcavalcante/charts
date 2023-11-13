@@ -1,0 +1,145 @@
+# Default values for baseApp.
+# This is a YAML-formatted file.
+# # Declare variables to be passed into your templates.
+# namespace: "staging"
+
+# replicaCount: 1
+
+# image:
+#   repository: enixltd/auth-app
+#   pullPolicy: IfNotPresent
+#   # Overrides the image tag whose default is the chart appVersion.
+#   tag: "staging-8452ec2e7"
+
+# env: 
+#   - name: DB_PASSWORD
+#     valueFrom:
+#       secretKeyRef:
+#         name: mysql-secret
+#         key: ROOT_PASSWORD
+#   - name: REDIS_PASSWORD
+#     valueFrom:
+#       secretKeyRef:
+#         name: redis-pass
+#         key: password
+#   - name: APPKEY_PASSWORD
+#     valueFrom:
+#       configMapKeyRef:
+#         name: auth-appkey-cm
+#         key: appkey
+#   - name: RABBITMQ_PASSWORD
+#     valueFrom:
+#       secretKeyRef:
+#         name: rmq-password
+#         key: rabbitmq-password
+
+# imagePullSecrets: [
+#   name: enixcred
+# ]
+
+# # volumes:
+# #   - name: nginx-config-volume
+# #     configMap: 
+# #       name: nginx-config
+
+# sidecar:
+#   enabled: false
+#   name: nginx
+#   image: nginx:1.22
+#   env:
+#   - name: FPM_HOST
+#     value: auth-app:9000
+#   imagePullPolicy:
+#   securityContext: []
+#   containerPort: 80
+#   volumeMounts:
+#     name: nginx-config-volume
+#     mountPath: /etc/nginx/nginx.conf
+#     subPath: config
+
+# container:
+#   port: 9000
+
+# name: auth
+# nameOverride: ""
+# fullnameOverride: "auth-service"
+
+
+# configMap:
+#   dataKey: appkey
+#   dataValue: "base64:7vNOFPncskSGUI7SiycGDpW+lC/QgdzkEGz03j6Okeg="
+
+# serviceAccount:
+#   # Specifies whether a service account should be created
+#   create: true
+#   # Annotations to add to the service account
+#   annotations: {}
+#   # The name of the service account to use.
+#   # If not set and create is true, a name is generated using the fullname template
+#   name: ""
+
+# podAnnotations: {}
+
+# podSecurityContext: {}
+#   # fsGroup: 2000
+
+# securityContext: {}
+#   # capabilities:
+#   #   drop:
+#   #   - ALL
+#   # readOnlyRootFilesystem: true
+#   # runAsNonRoot: true
+#   # runAsUser: 1000
+
+# service:
+#   type: ClusterIP
+#   port: 3000
+#   targetPort: 3000
+#   selector: [
+#     app: admin-app
+#   ]
+
+# ingress:
+#   enabled: false
+#   className: ""
+#   annotations: {}
+#     # kubernetes.io/ingress.class: nginx
+#     # kubernetes.io/tls-acme: "true"
+#   hosts:
+#     - host: chart-example.local
+#       paths:
+#         - path: /
+#           pathType: ImplementationSpecific
+#   tls: []
+#   #  - secretName: chart-example-tls
+#   #    hosts:
+#   #      - chart-example.local
+
+# resources:
+#   # We usually recommend not to specify default resources and to leave this as a conscious
+#   # choice for the user. This also increases chances charts run on environments with little
+#   # resources, such as Minikube. If you do want to specify resources, uncomment the following
+#   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+#   limits:
+#     cpu: 500m
+#     memory: 600Mi
+#   requests:
+#     cpu: 100m
+#     memory: 128Mi
+
+# autoscaling:
+#   enabled: false
+#   minReplicas: 1
+#   maxReplicas: 100
+#   targetCPUUtilizationPercentage: 80
+#   # targetMemoryUtilizationPercentage: 80
+
+# nodeSelector: {}
+
+# tolerations: []
+
+# affinity: {}
+
+# selectorLabels: [
+#   app: auth-app
+# ]
